@@ -89,7 +89,81 @@ I tweaked a bit with the original list of features and created a few new ones:
 total_messages = to_messages + from_messages
 total_messages_with_poi = from_this_person_to_poi + from_poi_to_this_person
 poi_total_messages_ratio = total_messages_with_poi / total_messages
+```
 
+Still I feel there were no significant changes in the result with the created features. The results with and without the 'poi_total_messages_ratio' are in [results_first_try](https://github.com/brunopagno/poi/blob/master/results_first_try.md). But considering the feature adding did not change much I preferred to focus on tweaking the algorithms for better results.
+
+I tried a few features combinations:
+
+```
+selected_features_list = [
+    'poi',
+    'poi_total_messages_ratio',
+    'salary',
+]
+Accuracy: 0.74680       Precision: 0.17241      Recall: 0.07000 F1: 0.09957     F2: 0.07944
+Total predictions: 10000        True positives:  140    False positives:  672   False negatives: 1860   True negatives: 7328
+```
+```
+selected_features_list = [
+    'poi',
+    'salary',
+    'total_payments',
+    'expenses',
+]
+Accuracy: 0.78062       Precision: 0.05625      Recall: 0.02700 F1: 0.03649     F2: 0.03013
+Total predictions: 13000        True positives:   54    False positives:  906   False negatives: 1946   True negatives: 10094
+```
+
+* too few features actually hinder the performance a lot
+
+```
+selected_features_list = [
+    'poi',
+    'poi_total_messages_ratio',
+    'salary',
+    'total_payments',
+    'total_stock_value',
+    'exercised_stock_options',
+    'restricted_stock',
+    'expenses',
+]
+Accuracy: 0.88967       Precision: 0.68101      Recall: 0.32450 F1: 0.43955     F2: 0.36245
+Total predictions: 15000        True positives:  649    False positives:  304   False negatives: 1351   True negatives: 12696
+```
+
+* this was the best result I got
+
+```
+selected_features_list = [
+    'poi',
+    'salary',
+    'deferred_income', 
+    'deferral_payments',
+    'loan_advances', 
+    'bonus', 
+    'long_term_incentive', 
+    'director_fees',
+    'expenses', 
+    'total_payments',
+    'exercised_stock_options',
+    'restricted_stock',
+    'restricted_stock_deferred',
+    'total_stock_value',
+    'from_messages',
+    'to_messages',
+    'from_this_person_to_poi',
+    'from_poi_to_this_person',
+    'shared_receipt_with_poi',
+    'other'
+]
+Accuracy: 0.88413       Precision: 0.64886      Recall: 0.28550 F1: 0.39653     F2: 0.32151
+Total predictions: 15000        True positives:  571    False positives:  309   False negatives: 1429   True negatives: 12691
+```
+
+The chosen set was a set with the features that had the most unique values.
+
+```
 selected_features_list = [
     'poi',
     'poi_total_messages_ratio',
@@ -98,13 +172,35 @@ selected_features_list = [
     'exercised_stock_options',
     'restricted_stock',
     'salary',
-    'expenses'
+    'expenses',
 ]
 ```
 
-Still I feel there were no significant changes in the result with the created features. The results with and without the 'poi_total_messages_ratio' are in [results_first_try](https://github.com/brunopagno/poi/blob/master/results_first_try.md). But considering the feature adding did not change much I preferred to focus on tweaking the algorithms for better results.
+| attribute                   | unique values |
+| --------------------------- | ------ |
+| total_payments              |   126  |
+| total_stock_value           |   125  |
+| email_address               |   112  |
+| exercised_stock_options     |   102  |
+| restricted_stock            |    98  |
+| salary                      |    95  |
+| expenses                    |    95  |
+| other                       |    93  |
+| to_messages                 |    87  |
+| shared_receipt_with_poi     |    84  |
+| from_messages               |    65  |
+| from_poi_to_this_person     |    58  |
+| long_term_incentive         |    53  |
+| deferred_income             |    45  |
+| bonus                       |    42  |
+| from_this_person_to_poi     |    42  |
+| deferral_payments           |    40  |
+| restricted_stock_deferred   |    19  |
+| director_fees               |    18  |
+| loan_advances               |     5  |
+| poi                         |     2  |
 
-Also, I picked the features with most unique values.
+I understand that there are more sophisticated ways to find the best features but for this project I decided to keep it simple and focus on other areas I have a better grasp.
 
 ## (Q3) The Algorithm
 

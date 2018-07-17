@@ -80,14 +80,59 @@ for person in my_dataset:
     else:
         my_dataset[person]['poi_total_messages_ratio'] = 0
 
+# selected_features_list = [
+#     'poi',
+#     'poi_total_messages_ratio',
+#     'salary',
+#     # 'total_payments',
+#     # 'total_stock_value',
+#     # 'exercised_stock_options',
+#     # 'restricted_stock',
+#     # 'expenses',
+# ]
+
+# selected_features_list = [
+#     'poi',
+#     # 'poi_total_messages_ratio',
+#     'salary',
+#     'total_payments',
+#     # 'total_stock_value',
+#     # 'exercised_stock_options',
+#     # 'restricted_stock',
+#     'expenses',
+# ]
+
+# selected_features_list = [
+#     'poi',
+#     'salary',
+#     'deferred_income', 
+#     'deferral_payments',
+#     'loan_advances', 
+#     'bonus', 
+#     'long_term_incentive', 
+#     'director_fees',
+#     'expenses', 
+#     'total_payments',
+#     'exercised_stock_options',
+#     'restricted_stock',
+#     'restricted_stock_deferred',
+#     'total_stock_value',
+#     'from_messages',
+#     'to_messages',
+#     'from_this_person_to_poi',
+#     'from_poi_to_this_person',
+#     'shared_receipt_with_poi',
+#     'other'
+# ]
+
 selected_features_list = [
     'poi',
     'poi_total_messages_ratio',
+    'salary',
     'total_payments',
     'total_stock_value',
     'exercised_stock_options',
     'restricted_stock',
-    'salary',
     'expenses',
 ]
 
@@ -183,11 +228,13 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # the final classifier
 clf = KNeighborsClassifier(n_neighbors=3, p=3)
+test_classifier(clf, my_dataset, selected_features_list)
 # test_classifier(clf, my_dataset, selected_features_list, folds=80)
 # test_classifier(clf, my_dataset, selected_features_list, folds=450)
 # test_classifier(clf, my_dataset, selected_features_list, folds=666)
 # test_classifier(clf, my_dataset, selected_features_list, folds=1500)
 # test_classifier(clf, my_dataset, selected_features_list, folds=22000)
+
 
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure

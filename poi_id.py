@@ -46,6 +46,17 @@ features_list = [
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
+is_poi = 0
+is_not_poi = 0
+for person in data_dict:
+    if (data_dict[person]['poi']):
+        is_poi += 1
+    else:
+        is_not_poi += 1
+
+print("poi => " + str(is_poi))
+print("non-poi => " + str(is_not_poi))
+
 # print dataset info :)
 di = DatasetInfo()
 di.setup(data_dict)

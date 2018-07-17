@@ -22,7 +22,7 @@ S'auto'
 p9
 sS'_sklearn_version'
 p10
-S'0.19.2'
+S'0.19.1'
 p11
 sS'metric'
 p12

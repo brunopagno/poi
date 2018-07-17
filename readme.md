@@ -72,6 +72,8 @@ This allows us to highlight a few details:
 * The dataset has 146 people.
 * Each of them has a set of information like bonuses, salary, etc
 * Much of the data is "NaN", meaning much of the data is missing
+* There are 18 poi and 128 non-poi
+* Features like loan_advances, director_fees, restricted_stock_deferred are missing values for almost the entire dataset, making them good candidates for disconsideration.
 
 ## (Q1) The outlier
 
@@ -218,7 +220,9 @@ It seems the best case would be running the algorithm with `n_neighbors = 3` and
 
 Validation is the step where we check how good is the model developed for predictions. A classic validation mistake is not splitting data between training and testing, leading to an overfitting of the classifier.
 
-For my cross validation I used the one that was already setup in `tester.py`. It uses sklearn's `StratifiedShuffleSplit` which is a "a merge of StratifiedKFold and ShuffleSplit". It felt a reasonable and safe way to validate my setup for it is sophisticated enough and is being used to validate our work. The results varied a bit according to the number of "folds" passed to the cross validator.
+For my cross validation I used the one that was already setup in `tester.py`. It uses sklearn's `StratifiedShuffleSplit` which is a "a merge of StratifiedKFold and ShuffleSplit". It felt a reasonable and safe way to validate my setup for it is sophisticated enough and is being used to validate our work in `tester.py`. Statified sampling aims to split the dataset so that the parts are somewhat similar. Because our dataset is small and has several more "non-POI" than "POI" keeping this structure is a better way to evaluate than using a random sampling.
+
+ The results varied a bit according to the number of "folds" passed to the cross validator.
 
 | Folds | Accuracy | Precision | Recall | F1 | F2 | Total predictions | True positives | False positives | True negatives | False negatives |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

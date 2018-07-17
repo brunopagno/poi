@@ -75,7 +75,7 @@ This allows us to highlight a few details:
 
 ## (Q1) The outlier
 
-![Salary x Bonus plot](https://bitbucket.org/brunopagno/poi/raw/79aa7eedd58c9d0ab98597759a5074d2cbba12fb/plot_salary_bonus.PNG)
+![Salary x Bonus plot](https://github.com/brunopagno/poi/blob/master/plot_salary_bonus.PNG?raw=true)
 
 I noticed a user called "TOTAL". It is clearly an information that can mislead analysis, since it is aggregating others. The image above shows clearly how much off the values are for Salary x Bonus. It's only fair that we remove the outlier when trying to find POI.
 
@@ -100,13 +100,13 @@ selected_features_list = [
 ]
 ```
 
-Still I feel there were no significant changes in the result with the created features. The results with and without the 'poi_total_messages_ratio' are in [results_first_try](https://bitbucket.org/brunopagno/poi/src/master/results_first_try.md). But considering the feature adding did not change much I preferred to focus on tweaking the algorithms for better results.
+Still I feel there were no significant changes in the result with the created features. The results with and without the 'poi_total_messages_ratio' are in [results_first_try](https://github.com/brunopagno/poi/blob/master/results_first_try.md). But considering the feature adding did not change much I preferred to focus on tweaking the algorithms for better results.
 
 Also, I picked the features with most unique values.
 
 ## (Q3) The Algorithm
 
-Testing which algorithm to use is all about chosing the values for parameters in the different algorithms provided by sklearn lib. As mentioned in the section above, my first tests had a few results which allowed me to take a good first look on which algorithms seem to be better for this dataset [results_first_try](https://bitbucket.org/brunopagno/poi/src/master/results_first_try.md).
+Testing which algorithm to use is all about chosing the values for parameters in the different algorithms provided by sklearn lib. As mentioned in the section above, my first tests had a few results which allowed me to take a good first look on which algorithms seem to be better for this dataset [results_first_try](https://github.com/brunopagno/poi/blob/master/results_first_try.md).
 
 | Algorithm | Accuracy | Precision | Recall | F1 | F2 | Total predictions | True positives | False positives | False negatives | True negatives |
 | --------- | -------- | --------- | ------ | -- | -- | ----------------- | -------------- | --------------- | --------------- | -------------- |

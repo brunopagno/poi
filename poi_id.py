@@ -242,3 +242,12 @@ test_classifier(clf, my_dataset, selected_features_list)
 ### generates the necessary .pkl files for validating your results.
 
 dump_classifier_and_data(clf, my_dataset, selected_features_list)
+
+
+
+print('extra thingy for the feature scaling')
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler
+clf = KNeighborsClassifier(n_neighbors=2, p=2, weights='distance')
+clf = Pipeline([('scale', MinMaxScaler()), ('classifier', clf)])
+test_classifier(clf, my_dataset, features_list)

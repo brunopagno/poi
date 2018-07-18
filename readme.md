@@ -73,7 +73,7 @@ This allows us to highlight a few details:
 * Each of them has a set of information like bonuses, salary, etc
 * Much of the data is "NaN", meaning much of the data is missing
 * There are 18 poi and 128 non-poi
-* Features like loan_advances, director_fees, restricted_stock_deferred are missing values for almost the entire dataset, making them good candidates for disconsideration.
+* Features like loan_advances, director_fees, restricted_stock_deferred are missing values for almost the entire dataset, making them good candidates for elimination.
 
 ## (Q1) The outlier
 
@@ -161,7 +161,7 @@ Accuracy: 0.88413       Precision: 0.64886      Recall: 0.28550 F1: 0.39653     
 Total predictions: 15000        True positives:  571    False positives:  309   False negatives: 1429   True negatives: 12691
 ```
 
-The chosen set was a set with the features that had the most unique values.
+The chosen set was a set with the features that had the most amount of unique values.
 
 ```
 selected_features_list = [
@@ -201,6 +201,15 @@ selected_features_list = [
 | poi                         |     2  |
 
 I understand that there are more sophisticated ways to find the best features but for this project I decided to keep it simple and focus on other areas I have a better grasp.
+
+**Feature scaling:** initially I decided not to use feature scaling since I found the results were already pretty good since the beginning, but after the first review on this work I actually took my time to setup a small test for feature scaling. In my first try I added a `MinMaxScaler` to a pipeline with the classifier I already had and the results became far worse. So I kept tweaking, and found that with a `KNeighborsClassifier(n_neighbors=2, p=2, weights='distance')` the results actually are above the margin of 0.3 precision and recall.
+
+```
+Accuracy: 0.82700       Precision: 0.33805      Recall: 0.31050 F1: 0.32369     F2: 0.31565
+Total predictions: 15000        True positives:  621    False positives: 1216   False negatives: 1379   True negatives: 11784
+```
+
+It would make perfect sense to use scaling for KNearestNeighbors algorithm since it uses euclidean distances, but the results somehow are better without it. I believe it is some perk of the dataset that causes this.
 
 ## (Q3) The Algorithm
 
